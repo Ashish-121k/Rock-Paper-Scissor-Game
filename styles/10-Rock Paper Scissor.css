@@ -39,6 +39,7 @@ body{
       cursor:pointer;
   }
 
+  .auto-play-button,
   .reset-score-button{
       padding:10px 15px;
       font-weight: bold;
@@ -47,6 +48,7 @@ body{
       border-radius: 25px;
       border: none;
       cursor:pointer;
+      margin-right: 10px;
 
   }
    .onclick-reset-button{

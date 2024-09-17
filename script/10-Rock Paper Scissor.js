@@ -16,6 +16,52 @@ let score = JSON.parse(localStorage.getItem('score'))||       // get the value i
         }
         */
 
+document.body.addEventListener('keydown', function(event){
+    if(event.key === 'p'){
+        playgame('Paper');
+    }
+    else if(event.key === 'r'){
+        playgame('Rock');
+    }
+    else if(event.key === 's' ){
+        playgame('Scissors');
+    }
+    else if(event.key === ' '){
+        reset();
+    }
+});
+
+const autoplay = document.querySelector('.js-auto-play-button');
+
+let intervalid;
+
+autoplay.addEventListener('click', function(){
+    if(autoplay.innerHTML !== 'Stop Playing'){
+        autoplay.innerHTML = 'Stop Playing';
+
+       intervalid = setInterval(function(){
+           const move = pickcomputermove();
+           playgame(move);
+
+        }, 1000);
+
+    }
+    else{
+        autoplay.innerHTML = 'Auto Play';
+        clearInterval(intervalid);
+    }
+});
+
+function reset(){
+    score.Wins=0;
+        score.Loses=0;
+        score.Ties=0;
+
+        localStorage.removeItem('score');         //remove the value(in string form) from a variable or object named score.
+        updateScoreElement();
+}
+
+
 function pickcomputermove()
 {
     let randomnumber=Math.random();   //math.random() takes random number b/w 0&1
@@ -112,8 +158,6 @@ function playgame(playerMove)
     document.querySelector('.js-moves').innerHTML = ` You <img src="images/${playerMove}-emoji.png" class = "move-icon">  & <img src="images/${computermove}-emoji.png" class = "move-icon">Computer` ;
 
     updateScoreElement();
-
-
 
 }
 function updateScoreElement()
